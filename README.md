@@ -24,7 +24,7 @@ Example of final product:
 ## Project scheme
 
 <p align="center">
-  <img src="https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/medias/2018/6/87c01524ada6080f40fc.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20240226%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20240226T171853Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=e5404dd9095c45ab426238618e3b2cb16e6b1b66c269d162c3c26c93b69853d5">
+  <img src="https://imgur.com/TsuYBxr">
 </p>
 
 ## Usage
