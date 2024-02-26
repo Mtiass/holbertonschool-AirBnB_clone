@@ -24,7 +24,7 @@ Example of final product:
 ## Project scheme
 
 <p align="center">
-  <img src="https://imgur.com/TsuYBxr">
+  <img src="https://i.imgur.com/TsuYBxr.png">
 </p>
 
 ## Usage
