@@ -44,7 +44,7 @@ class BaseModel:
         ins_dic['__class__'] = self.__class__.__name__
         ins_dic['created_at'] = self.created_at.isoformat()
         ins_dic['updated_at'] = self.updated_at.isoformat()
-        
+
         return ins_dic
 
     def __str__(self):
