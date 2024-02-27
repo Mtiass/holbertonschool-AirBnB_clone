@@ -22,17 +22,14 @@ class BaseModel:
         """
         This is the initializer method.
         """
-
+        self.id = str(uuid4())
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
         if kwargs:
             for key, value in kwargs.items():
                 if key != '__class__':
                     setattr(self, key, value)
         else:
-            self.id = str(uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
-
-        if "id" not in kwargs:
             models.storage.new(self)
 
     def save(self):
