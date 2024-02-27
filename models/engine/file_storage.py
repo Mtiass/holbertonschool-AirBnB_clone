@@ -58,11 +58,11 @@ class FileStorage:
                 class_name = key.split('.')[0]
                 # Convert iso string representations back to datetime obj
                 if 'created_at' in value:
-                    value['created_at'] = datetime.fromisoformat(
-                            value['created_at'])
+                    value['created_at'] = datetime.strptime(
+                            value['created_at'], "%Y-%m-%dT%H:%M:%S.%f")
                 if 'updated_at' in value:
-                    value['updated_at'] = datetime.fromisoformat(
-                            value['updated_at'])
+                    value['updated_at'] = datetime.strptime(
+                            value['updated_at'], "%Y-%m-%dT%H:%M:%S.%f")
                 self.__objects[key] = eval(class_name)(**value)
         except Exception:
             pass
