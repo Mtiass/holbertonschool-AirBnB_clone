@@ -50,10 +50,8 @@ class BaseModel:
 
         ins_dic = self.__dict__.copy()
         ins_dic['__class__'] = self.__class__.__name__
-        if (not isinstance(self.created_at, str)
-                and not isinstance(self.updated_at, str)):
-            ins_dic['created_at'] = self.created_at.isoformat()
-            ins_dic['updated_at'] = self.updated_at.isoformat()
+        ins_dic['created_at'] = self.created_at.isoformat()
+        ins_dic['updated_at'] = self.updated_at.isoformat()
 
         return (ins_dic)
 
