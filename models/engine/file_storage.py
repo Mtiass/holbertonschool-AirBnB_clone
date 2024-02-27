@@ -60,9 +60,11 @@ class FileStorage:
                 class_name = key.split('.')[0]
                 # Convert string representations of datetime back to datetime objects
                 if 'created_at' in value:
-                    value['created_at'] = datetime.fromisoformat(value['created_at'])
+                    value['created_at'] = datetime.fromisoformat(
+                            value['created_at'])
                 if 'updated_at' in value:
-                    value['updated_at'] = datetime.fromisoformat(value['updated_at'])
+                    value['updated_at'] = datetime.fromisoformat(
+                            value['updated_at'])
                 self.__objects[key] = eval(class_name)(**value)
         except Exception:
             pass
