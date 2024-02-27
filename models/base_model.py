@@ -37,7 +37,6 @@ class BaseModel:
         This is a public instance method that updates updated_at
         with the current datetime.
         """
-
         self.updated_at = datetime.now()
         models.storage.save()
 
@@ -46,7 +45,6 @@ class BaseModel:
         This is a public instance method that returns a dictionary
         containing all keys/values of __dict__ of the instance.
         """
-
         ins_dic = self.__dict__.copy()
         ins_dic['__class__'] = self.__class__.__name__
         ins_dic['created_at'] = self.created_at.isoformat()
@@ -59,6 +57,5 @@ class BaseModel:
         This is a method that returns a human-readable string,
         that is a representation of the object.
         """
-
         return ("[{}] ({}) {}".format(
            self.__class__.__name__, self.id, self.__dict__))

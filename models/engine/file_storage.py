@@ -26,7 +26,6 @@ class FileStorage:
         """
         This method returns the dictionary __objects.
         """
-
         return (self.__objects)
 
     def new(self, obj):
@@ -41,22 +40,20 @@ class FileStorage:
         """
         This method serializes __objects to the JSON file (path: __file_path).
         """
-
         dictionary = {}
         for key, value in self.__objects.items():
             dictionary[key] = value.to_dict()
         with open(self.__file_path, 'w', encoding="utf-8") as file:
-            file.write(json.dumps(dictionary))
+            json.dump(dictionary, file)
 
     def reload(self):
         """
         This method deserializes the JSON file to __objects (only if the JSON
         file (__file_path) exists.
         """
-
         try:
             with open(self.__file_path, encoding="utf-8") as file:
-                obj = json.loads(file.read())
+                obj = json.load(file)
             for key, value in obj.items():
                 class_name = key.split('.')[0]
                 # Convert iso string representations back to datetime obj
