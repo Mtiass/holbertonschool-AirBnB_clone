@@ -58,7 +58,7 @@ class FileStorage:
                 obj = json.loads(file.read())
             for key, value in obj.items():
                 class_name = key.split('.')[0]
-                # Convert string representations of datetime back to datetime objects
+                # Convert iso string representations back to datetime obj
                 if 'created_at' in value:
                     value['created_at'] = datetime.fromisoformat(
                             value['created_at'])
