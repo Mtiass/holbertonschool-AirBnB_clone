@@ -4,10 +4,9 @@ This module defines FileStorage as a class.
 """
 from models.base_model import BaseModel
 import json
-from os import path
 
 
-class FileStorage():
+class FileStorage:
     """
     This is a class that serializes instances to a JSON file and deserializes
     JSON file to instances.
@@ -33,9 +32,9 @@ class FileStorage():
         """
         This method sets in __objects the obj with key <obj class name>.id.
         """
-
-        key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        self.__objects[key] = obj
+        if obj:
+            key = "{}.{}".format(obj.__class__.__name__, obj.id)
+            self.__objects[key] = obj
 
     def save(self):
         """
@@ -46,7 +45,7 @@ class FileStorage():
         for key, value in self.__objects.items():
             dictionary[key] = value.to_dict()
         with open(self.__file_path, 'w', encoding="utf-8") as file:
-            json.dump(dictionary, file)
+            file.write(json.dumps(dictionary))
 
     def reload(self):
         """
@@ -54,9 +53,11 @@ class FileStorage():
         file (__file_path) exists.
         """
 
-        if path.isfile(self.__file_path):
-            try:
-                with open(self.__file_path, encoding="utf-8") as file:
-                    self.__objects = json.load(file)
-            except Exception:
-                pass
+        try:
+            with open(self.__file_path, encoding="utf-8") as file:
+                obj = json.loads(file.read())
+            for key, value in obj.items():
+                class_name = key.split('.')[0]
+                self.__objects[key] = eval(class_name)(**value)
+        except Exception:
+            pass

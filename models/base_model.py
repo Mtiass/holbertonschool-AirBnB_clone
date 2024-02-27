@@ -2,7 +2,7 @@
 """
 This module defines BaseModel as a class.
 """
-import uuid
+from uuid import uuid4
 from datetime import datetime
 import models
 
@@ -28,7 +28,7 @@ class BaseModel:
                 if key != '__class__':
                     setattr(self, key, value)
         else:
-            self.id = str(uuid.uuid4())
+            self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
             models.storage.new(self)
@@ -50,10 +50,12 @@ class BaseModel:
 
         ins_dic = self.__dict__.copy()
         ins_dic['__class__'] = self.__class__.__name__
-        ins_dic['created_at'] = self.created_at.isoformat()
-        ins_dic['updated_at'] = self.updated_at.isoformat()
+        if (not isinstance(self.created_at, str)
+                and not isinstance(self.updated_at, str)):
+            ins_dic['created_at'] = self.created_at.isoformat()
+            ins_dic['updated_at'] = self.updated_at.isoformat()
 
-        return ins_dic
+        return (ins_dic)
 
     def __str__(self):
         """
