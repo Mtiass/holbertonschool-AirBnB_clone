@@ -94,6 +94,27 @@ class BaseModel_Test(unittest.TestCase):
         base_model = BaseModel()
         self.assertEqual(base_model.id, 'mocked_uuid')
 
+    def test_init_with_kwargs_sets_attributes(self):
+        """This function tests initialization with kwargs sets attributes"""
+        kwargs = {
+            'id': 'test_id',
+            'created_at': datetime(2022, 1, 1),
+            'updated_at': datetime(2022, 1, 2),
+            'other_attr': 'value'
+        }
+        base_model = BaseModel(**kwargs)
+        self.assertEqual(base_model.id, 'test_id')
+        self.assertEqual(base_model.created_at, datetime(2022, 1, 1))
+        self.assertEqual(base_model.updated_at, datetime(2022, 1, 2))
+        self.assertTrue(hasattr(base_model, 'other_attr'))
+
+    def test_init_with_empty_kwargs_generates_attributes(self):
+        """This function tests initialization with empty kwargs generates attributes"""
+        base_model = BaseModel()
+        self.assertIsInstance(base_model.id, str)
+        self.assertIsInstance(base_model.created_at, datetime)
+        self.assertIsInstance(base_model.updated_at, datetime)
+
 
 if __name__ == '__main__':
     unittest.main()
