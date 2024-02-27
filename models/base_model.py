@@ -23,7 +23,7 @@ class BaseModel:
         This is the initializer method.
         """
 
-        if kwargs is not None and kwargs != {}:
+        if kwargs:
             for key, value in kwargs.items():
                 if key != '__class__':
                     setattr(self, key, value)
@@ -31,6 +31,8 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+
+        if "id" not in kwargs:
             models.storage.new(self)
 
     def save(self):
