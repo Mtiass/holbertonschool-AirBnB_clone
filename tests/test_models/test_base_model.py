@@ -93,8 +93,8 @@ class BaseModel_Test(unittest.TestCase):
         """This function tests initialization with kwargs sets attributes"""
         kwargs = {
             'id': 'test_id',
-            'created_at': datetime(2022, 1, 1),
-            'updated_at': datetime(2022, 1, 2),
+            'created_at': '2022-01-01T00:00:00.0',
+            'updated_at': '2022-01-02T00:00:00.0',
             'other_attr': 'value'
         }
         base_model = BaseModel(**kwargs)
