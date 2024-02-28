@@ -9,6 +9,7 @@ from datetime import datetime
 from models.engine.file_storage import FileStorage
 import os
 import json
+from unittest import mock
 
 
 class BaseModel_Test(unittest.TestCase):
@@ -41,6 +42,19 @@ class BaseModel_Test(unittest.TestCase):
     def test_updated_at_is_datetime(self):
         """This function tests if updated_at is a datetime"""
         self.assertIsInstance(self.base_model.updated_at, datetime)
+
+    @mock.patch('models.storage')
+    def test_save(self, mock_storage):
+        """Test that save method updates."""
+        inst = BaseModel()
+        old_created_at = inst.created_at
+        old_updated_at = inst.updated_at
+        inst.save()
+        new_created_at = inst.created_at
+        new_updated_at = inst.updated_at
+        self.assertNotEqual(old_updated_at, new_updated_at)
+        self.assertEqual(old_created_at, new_created_at)
+        self.assertTrue(mock_storage.save.called)
 
     def test_save(self):
         """This function tests to validate that updated_at is changed when
