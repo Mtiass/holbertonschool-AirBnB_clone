@@ -22,13 +22,22 @@ class FileStorage_Test(unittest.TestCase):
 
     def tearDown(self):
         """This is the tearDown function."""
-        if os.path.exists(self.file_path):
-            os.remove(self.file_path)
+        try:
+            os.remove("file.json")
+        except Exception:
+            pass
 
     def test_file_path_attribute(self):
         """This function tests __file_path attribute"""
         self.assertEqual(
             self.storage._FileStorage__file_path, "test_file.json")
+
+    def test_working_save(self):
+        """Test to validate save works."""
+        fs = FileStorage()
+        fs.new(BaseModel())
+        fs.save()
+        self.assertTrue(os.path.isfile("file.json"))
 
     def test_objects_attribute(self):
         """This function tests __objects attribute"""
