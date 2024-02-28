@@ -27,8 +27,8 @@ class FileStorage_Test(unittest.TestCase):
 
     def test_file_path_attribute(self):
         """This function tests __file_path attribute"""
-        self.assertEqual(self.storage._FileStorage__file_path,
-                         "test_file.json")
+        self.assertEqual(
+            self.storage._FileStorage__file_path, "test_file.json")
 
     def test_objects_attribute(self):
         """This function tests __objects attribute"""
@@ -52,7 +52,6 @@ class FileStorage_Test(unittest.TestCase):
         key = "BaseModel.{}".format(obj.id)
         self.storage._FileStorage__objects[key] = obj
         self.storage.save()
-
         # Check if the file has been created and contains the serialized data
         self.assertTrue(os.path.exists(self.file_path))
         with open(self.file_path, 'r', encoding="utf-8") as file:
@@ -66,11 +65,9 @@ class FileStorage_Test(unittest.TestCase):
         key = "BaseModel.{}".format(obj.id)
         self.storage._FileStorage__objects[key] = obj
         self.storage.save()
-
         # Clear objects and reload from the file
         self.storage._FileStorage__objects = {}
         self.storage.reload()
-
         self.assertIn(key, self.storage._FileStorage__objects)
         reloaded_obj = self.storage._FileStorage__objects[key]
         self.assertIsInstance(reloaded_obj, BaseModel)
