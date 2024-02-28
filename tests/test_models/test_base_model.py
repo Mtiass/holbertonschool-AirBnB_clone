@@ -9,6 +9,8 @@ from datetime import datetime
 from models.engine.file_storage import FileStorage
 import os
 import json
+from unittest import mock
+from unittest.mock import patch, Mock
 
 
 class BaseModel_Test(unittest.TestCase):
@@ -42,6 +44,19 @@ class BaseModel_Test(unittest.TestCase):
         """This function tests if updated_at is a datetime"""
         self.assertIsInstance(self.base_model.updated_at, datetime)
 
+    @mock.patch('models.storage')
+    def test_save(self, mock_storage):
+        """Test that save method updates."""
+        inst = BaseModel()
+        old_created_at = inst.created_at
+        old_updated_at = inst.updated_at
+        inst.save()
+        new_created_at = inst.created_at
+        new_updated_at = inst.updated_at
+        self.assertNotEqual(old_updated_at, new_updated_at)
+        self.assertEqual(old_created_at, new_created_at)
+        self.assertTrue(mock_storage.save.called)
+
     def test_save(self):
         """This function tests to validate that updated_at is changed when
         saved"""
@@ -51,12 +66,6 @@ class BaseModel_Test(unittest.TestCase):
         b.save()
         second_time = b.updated_at
         self.assertNotEqual(first_time, second_time)
-
-    def test_save_updates_updated_at(self):
-        """This function tests if save updates updated_at"""
-        original_updated_at = self.base_model.updated_at
-        self.base_model.save()
-        self.assertNotEqual(original_updated_at, self.base_model.updated_at)
 
     def test_to_dict_returns_dict(self):
         """This function tests if to_dict returns a dict"""
@@ -93,8 +102,8 @@ class BaseModel_Test(unittest.TestCase):
         """This function tests initialization with kwargs sets attributes"""
         kwargs = {
             'id': 'test_id',
-            'created_at': datetime(2022, 1, 1),
-            'updated_at': datetime(2022, 1, 2),
+            'created_at': '2022-01-01T00:00:00.0',
+            'updated_at': '2022-01-02T00:00:00.0',
             'other_attr': 'value'
         }
         base_model = BaseModel(**kwargs)
@@ -110,6 +119,27 @@ class BaseModel_Test(unittest.TestCase):
         self.assertIsInstance(base_model.id, str)
         self.assertIsInstance(base_model.created_at, datetime)
         self.assertIsInstance(base_model.updated_at, datetime)
+
+    @patch('models.storage')
+    def test_save_method(self, mock_storage):
+        # Create a mock instance of BaseModel
+        bm = BaseModel()
+        bm.id = 'mock_id'
+        bm.created_at = datetime(2022, 1, 1, 12, 0, 0)
+        bm.updated_at = datetime(2022, 1, 1, 12, 0, 0)
+
+        # Patch the save method in models.storage
+        mock_storage.save = Mock()
+
+        # Call the save method on the BaseModel instance
+        bm.save()
+
+        # Assert that updated_at is set to the current datetime
+        self.assertNotEqual(bm.updated_at, datetime(2022, 1, 1, 12, 0, 0))
+        self.assertTrue(isinstance(bm.updated_at, datetime))
+
+        # Assert that models.storage.save() is called
+        mock_storage.save.assert_called_once()
 
 
 if __name__ == '__main__':

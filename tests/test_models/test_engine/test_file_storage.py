@@ -7,6 +7,7 @@ from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 import os
 import json
+from models import storage
 
 
 class FileStorage_Test(unittest.TestCase):
@@ -91,6 +92,29 @@ class FileStorage_Test(unittest.TestCase):
         reloaded_obj = self.storage._FileStorage__objects[key]
         self.assertIsInstance(reloaded_obj, BaseModel)
         self.assertEqual(reloaded_obj.to_dict(), obj.to_dict())
+
+    def test_working_reload(self):
+        """Test to validate reload works."""
+        b = BaseModel()
+        key = "BaseModel" + "." + b.id
+        b.save()
+        b1 = BaseModel()
+        key1 = "BaseModel" + "." + b1.id
+        b1.save()
+        self.assertTrue(storage.all()[key] is not None)
+        self.assertTrue(storage.all()[key1] is not None)
+        with self.assertRaises(KeyError):
+            storage.all()[12345]
+
+    def test_working_reload(self):
+        """Checks reload functionality if file_path doesn't exist"""
+        fs = FileStorage()
+        b = BaseModel()
+        key = "BaseModel" + '.' + b.id
+        fs.new(b)
+        fs.save()
+        fs.reload()
+        self.assertTrue(fs.all()[key])
 
 
 if __name__ == '__main__':
