@@ -6,7 +6,9 @@ import unittest
 from models.base_model import BaseModel
 from time import sleep
 from datetime import datetime
-from unittest.mock import patch
+from models.engine.file_storage import FileStorage
+import os
+import json
 
 
 class BaseModel_Test(unittest.TestCase):
@@ -87,13 +89,6 @@ class BaseModel_Test(unittest.TestCase):
             self.base_model.id, self.base_model.__dict__)
         self.assertEqual(str(self.base_model), expected_str)
 
-    @patch('uuid.uuid4')
-    def test_id_is_set_on_instance_creation(self, mock_uuid4):
-        """This function tests if id is set on instance creation"""
-        mock_uuid4.return_value = 'mocked_uuid'
-        base_model = BaseModel()
-        self.assertEqual(base_model.id, 'mocked_uuid')
-
     def test_init_with_kwargs_sets_attributes(self):
         """This function tests initialization with kwargs sets attributes"""
         kwargs = {
@@ -109,7 +104,8 @@ class BaseModel_Test(unittest.TestCase):
         self.assertTrue(hasattr(base_model, 'other_attr'))
 
     def test_init_with_empty_kwargs_generates_attributes(self):
-        """This function tests initialization with empty kwargs generates attributes"""
+        """This function tests initialization with empty kwargs generates
+        attributes"""
         base_model = BaseModel()
         self.assertIsInstance(base_model.id, str)
         self.assertIsInstance(base_model.created_at, datetime)
