@@ -47,6 +47,11 @@ class FileStorage_Test(unittest.TestCase):
         """This function tests all method"""
         self.assertEqual(self.storage.all(), {})
 
+    def test_all_return_type(self):
+        """Test to validate all() returns an object."""
+        fs = FileStorage()
+        self.assertEqual(type(fs.all()), dict)
+
     def test_new_method(self):
         """This function tests new method"""
         obj = BaseModel()
