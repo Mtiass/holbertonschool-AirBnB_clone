@@ -11,15 +11,15 @@ class HBNBCommand(cmd.Cmd):
     """
     This is a class that works as command interpreter.
     """
-    prompt = "(hbnb)"
+    prompt = "(hbnb) "
 
-    def _quit(self, arg):
+    def do_quit(self, arg):
         """
         This method exits the program.
         """
         return (True)
 
-    def _EOF(self, arg):
+    def do_EOF(self, arg):
         """
         This method exits the program.
         """
@@ -32,11 +32,12 @@ class HBNBCommand(cmd.Cmd):
         """
         pass
 
-    def _create(self, arg):
+    def do_create(self, arg):
         """
         Creates a new instance of BaseModel, saves it (to the JSON file)
         and prints the id.
         """
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
