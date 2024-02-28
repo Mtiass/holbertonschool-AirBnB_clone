@@ -113,7 +113,6 @@ class FileStorage_Test(unittest.TestCase):
         key = "BaseModel" + '.' + b.id
         fs.new(b)
         fs.save()
-        fs.reset()
         fs.reload()
         self.assertTrue(fs.all()[key])
 
