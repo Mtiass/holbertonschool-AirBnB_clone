@@ -66,12 +66,6 @@ class BaseModel_Test(unittest.TestCase):
         second_time = b.updated_at
         self.assertNotEqual(first_time, second_time)
 
-    def test_save_updates_updated_at(self):
-        """This function tests if save updates updated_at"""
-        original_updated_at = self.base_model.updated_at
-        self.base_model.save()
-        self.assertNotEqual(original_updated_at, self.base_model.updated_at)
-
     def test_to_dict_returns_dict(self):
         """This function tests if to_dict returns a dict"""
         result = self.base_model.to_dict()
