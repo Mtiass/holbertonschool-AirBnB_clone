@@ -10,6 +10,7 @@ from models.engine.file_storage import FileStorage
 import os
 import json
 from unittest import mock
+from unittest.mock import patch, Mock
 
 
 class BaseModel_Test(unittest.TestCase):
@@ -118,6 +119,27 @@ class BaseModel_Test(unittest.TestCase):
         self.assertIsInstance(base_model.id, str)
         self.assertIsInstance(base_model.created_at, datetime)
         self.assertIsInstance(base_model.updated_at, datetime)
+
+    @patch('models.storage')
+    def test_save_method(self, mock_storage):
+        # Create a mock instance of BaseModel
+        bm = BaseModel()
+        bm.id = 'mock_id'
+        bm.created_at = datetime(2022, 1, 1, 12, 0, 0)
+        bm.updated_at = datetime(2022, 1, 1, 12, 0, 0)
+
+        # Patch the save method in models.storage
+        mock_storage.save = Mock()
+
+        # Call the save method on the BaseModel instance
+        bm.save()
+
+        # Assert that updated_at is set to the current datetime
+        self.assertNotEqual(bm.updated_at, datetime(2022, 1, 1, 12, 0, 0))
+        self.assertTrue(isinstance(bm.updated_at, datetime))
+
+        # Assert that models.storage.save() is called
+        mock_storage.save.assert_called_once()
 
 
 if __name__ == '__main__':
