@@ -5,6 +5,7 @@ This module defines FileStorage as a class.
 from models.base_model import BaseModel
 import json
 from datetime import datetime
+from os import path
 
 
 class FileStorage:
@@ -44,25 +45,17 @@ class FileStorage:
         for key, value in self.__objects.items():
             dictionary[key] = value.to_dict()
         with open(self.__file_path, 'w', encoding="utf-8") as file:
-            json.dump(dictionary, file)
+            file.write(json.dumps(dictionary))
 
     def reload(self):
         """
         This method deserializes the JSON file to __objects (only if the JSON
         file (__file_path) exists.
         """
-        try:
-            with open(self.__file_path, encoding="utf-8") as file:
-                obj = json.loads(file.read())
-            for key, value in obj.items():
-                class_name = key.split('.')[0]
-                # Convert iso string representations back to datetime obj
-                if 'created_at' in value:
-                    value['created_at'] = datetime.strptime(
-                            value['created_at'], "%Y-%m-%dT%H:%M:%S.%f")
-                if 'updated_at' in value:
-                    value['updated_at'] = datetime.strptime(
-                            value['updated_at'], "%Y-%m-%dT%H:%M:%S.%f")
-                self.__objects[key] = eval(class_name)(**value)
-        except Exception:
-            pass
+        class_mapping = {'BaseModel': BaseModel}
+        if path.isfile(self.__file_path):
+            with open(self.__file_path) as f:
+                obj = json.load(f)
+                for key, value in obj.items():
+                    class_name = value["__class__"]
+                    self.new(class_mapping[class_name](**value))
