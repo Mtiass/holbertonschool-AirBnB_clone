@@ -3,12 +3,13 @@
 This module defines FileStorage as a class.
 """
 import json
-from datetime import datetime
 from os import path
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
 from models.city import City
+from models.amenity import Amenity
+
 
 class FileStorage:
     """
@@ -58,7 +59,8 @@ class FileStorage:
             'BaseModel': BaseModel,
             'User': User,
             'State': State,
-            'City': City
+            'City': City,
+            'Amenity': Amenity
             }
         if path.isfile(self.__file_path):
             with open(self.__file_path) as f:
