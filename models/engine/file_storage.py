@@ -9,6 +9,7 @@ from models.user import User
 from models.state import State
 from models.city import City
 from models.amenity import Amenity
+from models.review import Review
 
 
 class FileStorage:
@@ -60,7 +61,8 @@ class FileStorage:
             'User': User,
             'State': State,
             'City': City,
-            'Amenity': Amenity
+            'Amenity': Amenity,
+            'Review': Review
             }
         if path.isfile(self.__file_path):
             with open(self.__file_path) as f:
