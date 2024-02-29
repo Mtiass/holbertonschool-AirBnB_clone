@@ -13,5 +13,5 @@ class State(BaseModel):
     Attributes:
         name: is a public class attribute.
     """
-    
+
     name = ""

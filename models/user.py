@@ -16,7 +16,7 @@ class User(BaseModel):
         first_name: public class attribute
         last_name: public class attribute
     """
-    
+
     email = ""
     password = ""
     first_name = ""
