@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Unittest for State class.
+Unittest for City class.
 """
 import unittest
 from models.city import City
@@ -8,7 +8,7 @@ from models.city import City
 
 class City_Test(unittest.TestCase):
     """
-    Tests for State class
+    Tests for City class
     """
     def setUp(self):
         """This is the set up function."""
