@@ -2,7 +2,6 @@
 """
 This module defines Amenity as a class.
 """
-import models
 from models.base_model import BaseModel
 
 
