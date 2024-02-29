@@ -4,10 +4,11 @@ This module defines a program that contains the entry point of
 the command interpreter.
 """
 import cmd
+from shlex import split as sp
 from models.base_model import BaseModel
 from models import storage
 import models
-from shlex import split as sp
+
 
 
 class HBNBCommand(cmd.Cmd):
@@ -103,6 +104,10 @@ class HBNBCommand(cmd.Cmd):
         class name.
         """
         args = arg.split()
+        if not args:
+            lists = [str(obj) for obj in storage.all().values()]
+            print(lists)
+            return
         class_name = args[0]
         if class_name not in self.class_mapping:
             print("** class doesn't exist **")
