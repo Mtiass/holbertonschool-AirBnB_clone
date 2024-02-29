@@ -2,10 +2,11 @@
 """
 This module defines FileStorage as a class.
 """
-from models.base_model import BaseModel
 import json
 from datetime import datetime
 from os import path
+from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage:
@@ -52,7 +53,7 @@ class FileStorage:
         This method deserializes the JSON file to __objects (only if the JSON
         file (__file_path) exists.
         """
-        class_mapping = {'BaseModel': BaseModel}
+        class_mapping = {'BaseModel': BaseModel, 'User': User}
         if path.isfile(self.__file_path):
             with open(self.__file_path) as f:
                 obj = json.load(f)

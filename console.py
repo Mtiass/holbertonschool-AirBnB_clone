@@ -6,8 +6,9 @@ the command interpreter.
 import cmd
 from shlex import split as sp
 from models.base_model import BaseModel
+from models.user import User
 from models import storage
-import models
+import models 
 
 
 
@@ -16,7 +17,7 @@ class HBNBCommand(cmd.Cmd):
     This is a class that works as command interpreter.
     """
     prompt = "(hbnb) "
-    class_mapping = {'BaseModel': BaseModel}
+    class_mapping = {'BaseModel': BaseModel, 'User': User}
 
     def do_quit(self, arg):
         """
