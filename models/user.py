@@ -16,12 +16,8 @@ class User(BaseModel):
         first_name: public class attribute
         last_name: public class attribute
     """
-
-    def __init__(self):
-        """
-        This is the initializer method.
-        """
-        self.email = ""
-        self.password = ""
-        self.first_name = ""
-        self.last_name = ""
+    
+    email = ""
+    password = ""
+    first_name = ""
+    last_name = ""
