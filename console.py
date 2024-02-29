@@ -97,6 +97,7 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
             return
         storage.all().pop(obj_id)
+        storage.save()
 
     def do_all(self, arg):
         """
