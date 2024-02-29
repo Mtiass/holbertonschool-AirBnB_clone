@@ -8,6 +8,7 @@ from os import path
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
+from models.city import City
 
 class FileStorage:
     """
@@ -53,7 +54,12 @@ class FileStorage:
         This method deserializes the JSON file to __objects (only if the JSON
         file (__file_path) exists.
         """
-        class_mapping = {'BaseModel': BaseModel, 'User': User, State: 'State'}
+        class_mapping = {
+            'BaseModel': BaseModel,
+            'User': User,
+            'State': State,
+            'City': City
+            }
         if path.isfile(self.__file_path):
             with open(self.__file_path) as f:
                 obj = json.load(f)
