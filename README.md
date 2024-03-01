@@ -27,6 +27,20 @@ Example of final product:
   <img src="https://i.imgur.com/TsuYBxr.png">
 </p>
 
+## File Structure
+
+The project is organized into the following directories and files:
+
+- `console.py` - The entry point of the command interpreter for the console component.
+
+- `models/` - Contains the classes, such as `BaseModel`, `User`, `State`, `City`,
+  `Amenity`, `Place`, and `Review`.
+  
+- `models/engine/` - Contains the `file_storage.py` file, which handles the
+  serialization and deserialization of objects to and from JSON files.
+  
+- `tests/` - Contains unit tests for the application.
+
 ## Usage
 * All files are interpreted/compiled on Ubuntu 20.04 LTS using python3 (version 3.8.5)
 * All code use the PEP 8 style (version 2.7.*)
@@ -82,6 +96,22 @@ $ echo "python3 -m unittest discover tests" | bash
 ```
 
 ---
+
+## Dependencies and Installation Instructions
+
+- Latest version of Python 3.8.5 or later.
+
+### Installing
+
+1. Clone the repository to your local machine.
+  ```
+  $ git clone https://github.com/alriffaud/holbertonschool-AirBnB_clone.git
+  ```
+2. Navigate to the project directory.
+
+### Running the Project
+
+After setting up your environment, you can run the console by executing `./console.py`.
 
 ## Tasks
 
