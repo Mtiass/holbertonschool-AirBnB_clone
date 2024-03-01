@@ -31,28 +31,9 @@ and saving/loading these from a file.
 
 - Serialization: When an object is saved, it is first converted to a dictionary using\
   the to_dict method of the BaseModel class. This dictionary is then serialized to JSON format.
-```
-# base_model.py
-def to_dict(self):
-     ins_dic = self.__dict__.copy()
-     ins_dic['__class__'] = self.__class__.__name__
-     ins_dic['created_at'] = self.created_at.isoformat()
-     ins_dic['updated_at'] = self.updated_at.isoformat()
-     return ins_dic
-```
-
+  
 - Deserialization: When objects are loaded, the JSON file is deserialized back into a dictionary,\
   and each dictionary is then converted back into an object of the appropriate class.
-```
-# file_storage.py
-def reload(self):
-     if path.isfile(self.__file_path):
-         with open(self.__file_path) as f:
-             obj = json.load(f)
-             for key, value in obj.items():
-                class_name = value["__class__"]
-                self.new(class_mapping[class_name](**value))
-```
 
 ### Packages / Modules / Cyclical Imports
 
