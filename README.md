@@ -73,7 +73,8 @@ The tests package contains unit tests for the models.
 The BaseModel class works as the father class for all other models, providing common attributes and methods.\
 The FileStorage class acts as the data access layer, handling the serialization and deserialization of objects.
 
-- The BaseModel class provides a common structure for all models, including attributes for id,\ created_at, and updated_at, and methods for saving and converting objects to dictionaries.
+- The BaseModel class provides a common structure for all models, including attributes for id,\
+  created_at, and updated_at, and methods for saving and converting objects to dictionaries.
 
 - The FileStorage class acts as the data access layer, managing the persistence of objects\
   to a file. It provides methods for saving objects to a JSON file and loading them back into memory.
@@ -85,7 +86,8 @@ The FileStorage class acts as an interface for storage.
 - FileStorage: The ``FileStorage`` class provides a unified interface for saving and loading objects.\
  It uses a dictionary to store objects and serializes this dictionary to a JSON file.
 
-- Abstraction Layer: The abstraction is provided by the storage module, which creates a single instance of\ ``FileStorage`` and provides access to its methods through this instance.
+- Abstraction Layer: The abstraction is provided by the storage module, which creates a single instance of\
+   ``FileStorage`` and provides access to its methods through this instance.
 
 ### Abstract Classes (BaseClass)
 
@@ -166,13 +168,13 @@ $
 
 | Component 	| Description 	|
 |:--------------------------:	|:------------------------------------------------------------:	|
-| help | displays all commands available |
-| create | create object and prints it's id |
-| update | updates an object with a new attribute |
-| destroy | destroys an specified object |
+| help | Displays all commands available. |
+| create | Create object and prints it's id. |
+| update | Updates an object with a new attribute. |
+| destroy | Destroys an specified object. |
 | show | Retrieves an object from a file, a database. |
-| all | Displays all objects in a class |
-| quit | Exits the console |
+| all | Displays all objects in a class. |
+| quit | Exits the console. |
 
 ## Testing
 
