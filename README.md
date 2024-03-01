@@ -21,6 +21,86 @@ Example of final product:
   <img src="https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/268/8-index.png">
 </p>
 
+## Learning objectives
+
+### Serialization / Deserialization Flow
+
+In our project, these processes are handled by the ``FileStorage`` class,\
+which is responsible for converting instances to dictionaries, then to JSON,\
+and saving/loading these from a file.
+
+- Serialization: When an object is saved, it is first converted to a dictionary using\
+  the to_dict method of the BaseModel class. This dictionary is then serialized to JSON format.
+```
+# base_model.py
+def to_dict(self):
+     ins_dic = self.__dict__.copy()
+     ins_dic['__class__'] = self.__class__.__name__
+     ins_dic['created_at'] = self.created_at.isoformat()
+     ins_dic['updated_at'] = self.updated_at.isoformat()
+     return ins_dic
+```
+
+- Deserialization: When objects are loaded, the JSON file is deserialized back into a dictionary,\
+  and each dictionary is then converted back into an object of the appropriate class.
+```
+# file_storage.py
+def reload(self):
+     if path.isfile(self.__file_path):
+         with open(self.__file_path) as f:
+             obj = json.load(f)
+             for key, value in obj.items():
+                class_name = value["__class__"]
+                self.new(class_mapping[class_name](**value))
+```
+
+### Packages / Modules / Cyclical Imports
+
+The models package contains various classes representing different entities in the application,\
+while the engine package includes the FileStorage class for handling serialization and deserialization.\
+The tests package contains unit tests for the models.
+
+- Module Import: Modules are imported using relative imports within the same package.\
+  For example, ``BaseModel`` is imported into ``console.py`` using ``from models.base_model import BaseModel``
+
+- Cyclical Imports: Cyclical imports are managed by ensuring that import statements are placed\
+  at the bottom of files or within functions, avoiding import loops. For instance,\
+  ``BaseModel`` imports ``storage`` ``from models.engine.file_storage``,\
+  but ``FileStorage`` does not import ``BaseModel`` directly, avoiding a circular dependency.
+
+### Layered Architecture
+
+The BaseModel class works as the father class for all other models, providing common attributes and methods.\
+The FileStorage class acts as the data access layer, handling the serialization and deserialization of objects.
+
+- The BaseModel class provides a common structure for all models, including attributes for id,\ created_at, and updated_at, and methods for saving and converting objects to dictionaries.
+
+- The FileStorage class acts as the data access layer, managing the persistence of objects\
+  to a file. It provides methods for saving objects to a JSON file and loading them back into memory.
+
+### Interfaces (Storage)
+ 
+The FileStorage class acts as an interface for storage.
+
+- FileStorage: The ``FileStorage`` class provides a unified interface for saving and loading objects.\
+ It uses a dictionary to store objects and serializes this dictionary to a JSON file.
+
+- Abstraction Layer: The abstraction is provided by the storage module, which creates a single instance of\ ``FileStorage`` and provides access to its methods through this instance.
+
+### Abstract Classes (BaseClass)
+
+The ``BaseModel`` class is an abstract class that provides a common structure and\
+behavior for all models in the application. It ensures that all models have a consistent\
+set of attributes and methods.
+
+- BaseModel Class: The BaseModel class is an abstract class that defines common attributes and\
+  methods for all models.
+  
+- Inheritance: Other model classes, such as User, State, and City, inherit from BaseModel.\
+  This inheritance ensures that all models share the same base attributes and methods.
+  Hierarchical inheritance is a type of inheritance where multiple subclasses inherit from a single base class.
+
+
 ## Project scheme
 
 <p align="center">
@@ -81,6 +161,18 @@ EOF  help  quit
 (hbnb) 
 $
 ```
+
+## How to use the commands
+
+| Component 	| Description 	|
+|:--------------------------:	|:------------------------------------------------------------:	|
+| help | displays all commands available |
+| create | create object and prints it's id |
+| update | updates an object with a new attribute |
+| destroy | destroys an specified object |
+| show | Retrieves an object from a file, a database. |
+| all | Displays all objects in a class |
+| quit | Exits the console |
 
 ## Testing
 
