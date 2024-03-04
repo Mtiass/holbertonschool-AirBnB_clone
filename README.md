@@ -30,15 +30,15 @@ which is responsible for converting instances to dictionaries, then to JSON,\
 and saving/loading these from a file.
 
 - Serialization: When an object is saved, it is first converted to a dictionary using\
-  the to_dict method of the BaseModel class. This dictionary is then serialized to JSON format.
+  the `to_dict` method of the *BaseModel* class. This dictionary is then serialized to **JSON** format.
   
-- Deserialization: When objects are loaded, the JSON file is deserialized back into a dictionary,\
+- Deserialization: When objects are loaded, the **JSON** file is deserialized back into a dictionary,\
   and each dictionary is then converted back into an object of the appropriate class.
 
 ### Packages / Modules / Cyclical Imports
 
 The models package contains various classes representing different entities in the application,\
-while the engine package includes the FileStorage class for handling serialization and deserialization.\
+while the engine package includes the *FileStorage* class for handling serialization and deserialization.\
 The tests package contains unit tests for the models.
 
 - Module Import: Modules are imported using relative imports within the same package.\
@@ -51,21 +51,21 @@ The tests package contains unit tests for the models.
 
 ### Layered Architecture
 
-The BaseModel class works as the father class for all other models, providing common attributes and methods.\
-The FileStorage class acts as the data access layer, handling the serialization and deserialization of objects.
+The *BaseModel* class works as the father class for all other models, providing common attributes and methods.\
+The *FileStorage* class acts as the data access layer, handling the serialization and deserialization of objects.
 
-- The BaseModel class provides a common structure for all models, including attributes for id,\
-  created_at, and updated_at, and methods for saving and converting objects to dictionaries.
+- The *BaseModel* class provides a common structure for all models, including attributes for **id**,\
+  `created_at`, and `updated_at`, and methods for saving and converting objects to dictionaries.
 
-- The FileStorage class acts as the data access layer, managing the persistence of objects\
-  to a file. It provides methods for saving objects to a JSON file and loading them back into memory.
+- The `FileStorage` class acts as the data access layer, managing the persistence of objects\
+  to a file. It provides methods for saving objects to a **JSON** file and loading them back into memory.
 
 ### Interfaces (Storage)
  
-The FileStorage class acts as an interface for storage.
+The *FileStorage* class acts as an interface for *storage*.
 
 - FileStorage: The ``FileStorage`` class provides a unified interface for saving and loading objects.\
- It uses a dictionary to store objects and serializes this dictionary to a JSON file.
+ It uses a dictionary to store objects and serializes this dictionary to a **JSON** file.
 
 - Abstraction Layer: The abstraction is provided by the storage module, which creates a single instance of\
    ``FileStorage`` and provides access to its methods through this instance.
@@ -76,13 +76,13 @@ The ``BaseModel`` class is an abstract class that provides a common structure an
 behavior for all models in the application. It ensures that all models have a consistent\
 set of attributes and methods.
 
-- BaseModel Class: The BaseModel class is an abstract class that defines common attributes and\
+- BaseModel Class: The `BaseModel` class is an abstract class that defines common attributes and\
   methods for all models.
   
-- Inheritance: Other model classes, such as User, State, and City, inherit from BaseModel.\
+- Inheritance: Other model classes, such as `User`, `State`, and `City`, inherit from `BaseModel`.\
   This inheritance ensures that all models share the same base attributes and methods.
-  Hierarchical inheritance is a type of inheritance where multiple subclasses inherit from a single base class.
-
+  Hierarchical inheritance is a type of inheritance where multiple subclasses inherit from\
+  a single base class.
 
 ## Project scheme
 
