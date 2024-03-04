@@ -26,7 +26,7 @@ Example of final product:
 ### Serialization / Deserialization Flow
 
 In our project, these processes are handled by the ``FileStorage`` class,\
-which is responsible for converting instances to dictionaries, then to JSON,\
+which is responsible for converting instances to dictionaries, then to **JSON**,\
 and saving/loading these from a file.
 
 - Serialization: When an object is saved, it is first converted to a dictionary using\
