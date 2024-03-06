@@ -19,7 +19,6 @@ class FileStorage:
     JSON file to instances.
 
     Attributes:
-        id: is a public instance attribute.
         __file_path: is a string - path to the JSON file.
         __objects: is a dictionary - empty but will store all objects by
         <class name>.id.
