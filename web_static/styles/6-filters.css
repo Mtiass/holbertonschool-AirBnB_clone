@@ -16,14 +16,12 @@
     display: inline;
     float: left;
     vertical-align: middle;
-    margin-left: 45px;
     line-height: 20px;
 }
 
 .amenities{
     height: 100%;
     width: 25%;
-    margin-left: 45px;
     display: inline;
     float: left;
     vertical-align: middle;
@@ -34,6 +32,7 @@
     font-weight: 600;
     margin-top: 13px;
     margin-bottom: 4px;
+    padding-left: 45px;
 }
 
 .locations h4, .amenities h4{
@@ -41,6 +40,7 @@
     font-size: 14px;
     margin-top: 4px;
     margin-bottom: 13px;
+    padding-left: 45px;
 }
 
 .filters button{
